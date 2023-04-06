@@ -48,6 +48,7 @@
                     <option value="Volumen">Volumen</option>
                     <option value="Moneda">Moneda</option>
                     <option value="Tiempo">Tiempo</option>
+                    <option value="Datos">Datos</option>
                 </select>
             </div>
             <div class="row">

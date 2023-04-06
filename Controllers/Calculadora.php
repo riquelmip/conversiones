@@ -27,19 +27,22 @@ class Calculadora extends Controllers
 
             if ($tipo == 'Longitud') {
                 $this->convertidor = new ConversorLongitud();
-                $arrResponse = array('estado' => true, 'resultado' => $this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 'ud_final' => $unidad_hasta);
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Masa') {
                 $this->convertidor = new ConversorMasa();
-                $arrResponse = array('estado' => true, 'resultado' => $this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 'ud_final' => $unidad_hasta);
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Volumen') {
                 $this->convertidor = new ConversorVolumen();
-                $arrResponse = array('estado' => true, 'resultado' => $this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 'ud_final' => $unidad_hasta);
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Moneda') {
-                $this->convertidor = new ConversorMoneda(20.0);
-                $arrResponse = array('estado' => true, 'resultado' => $this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 'ud_final' => $unidad_hasta);
+                $this->convertidor = new ConversorMoneda();
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Tiempo') {
                 $this->convertidor = new ConversorTiempo();
-                $arrResponse = array('estado' => true, 'resultado' => $this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 'ud_final' => $unidad_hasta);
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
+            } else if ($tipo == 'Datos') {
+                $this->convertidor = new ConversorDatos();
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             die();
@@ -78,7 +81,11 @@ class Calculadora extends Controllers
                 ),
                 "Moneda" => array(
                     "USD",
-                    "MXN"
+                    "EUR",
+                    "GBP",
+                    "JPY",
+                    "CAD",
+                    "AUD"
                 ),
                 "Tiempo" => array(
                     "segundo",
@@ -86,6 +93,14 @@ class Calculadora extends Controllers
                     "hora",
                     "dia",
                     "semana"
+                ),
+                "Datos" => array(
+                    "bit",
+                    "byte",
+                    "kilobyte",
+                    "megabyte",
+                    "gigabyte",
+                    "terabyte",
                 ),
 
             );
@@ -100,6 +115,8 @@ class Calculadora extends Controllers
                 $arr = $arrDataUnidades['Moneda'];
             } else if ($tipo == 'Tiempo') {
                 $arr = $arrDataUnidades['Tiempo'];
+            } else if ($tipo == 'Datos') {
+                $arr = $arrDataUnidades['Datos'];
             }
 
             if (count($arr) > 0) {

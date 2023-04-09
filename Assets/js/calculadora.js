@@ -1,32 +1,9 @@
 var div_cargando = document.querySelector("#divLoading");
 document.addEventListener("DOMContentLoaded", function () {
+  llenarselects("Longitud");
   $("#tipo").change(function () {
     let tipo = $("#tipo").val();
-
-    $.ajax({
-      type: "POST",
-      url: base_url + "/calculadora/getSelects",
-      data: { tipo: tipo },
-      beforeSend: function () {
-        div_cargando.style.display = "flex";
-      },
-      success: function (json) {
-        var jsonData = JSON.parse(json);
-        if (jsonData.estado) {
-          $("#unidad1").empty().html(jsonData.unidades);
-          $("#unidad2").empty().html(jsonData.unidades);
-          toastr.success("Exito", "Datos cargados");
-        } else {
-          toastr.error("Ocurrió un error", "Error");
-        }
-      },
-      error: function (json) {
-        toastr.error("Ocurrió un error", "Error");
-      },
-      complete: function () {
-        div_cargando.style.display = "none";
-      },
-    });
+    llenarselects(tipo);
   });
 
   $("#formConversion").submit(function (event) {
@@ -61,3 +38,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+function llenarselects(tipo) {
+  $.ajax({
+    type: "POST",
+    url: base_url + "/calculadora/getSelects",
+    data: { tipo: tipo },
+    beforeSend: function () {
+      div_cargando.style.display = "flex";
+    },
+    success: function (json) {
+      var jsonData = JSON.parse(json);
+      if (jsonData.estado) {
+        $("#unidad1").empty().html(jsonData.unidades);
+        $("#unidad2").empty().html(jsonData.unidades);
+        toastr.success("Exito", "Datos cargados");
+      } else {
+        toastr.error("Ocurrió un error", "Error");
+      }
+    },
+    error: function (json) {
+      toastr.error("Ocurrió un error", "Error");
+    },
+    complete: function () {
+      div_cargando.style.display = "none";
+    },
+  });
+}

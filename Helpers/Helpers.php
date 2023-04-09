@@ -80,14 +80,14 @@ class ConversorMoneda implements IConvertidor
 {
     private $tasas_conversion = array(
         "USD" => array(
-            "EUR" => 0.84,
+            "EUR" => 0.92,
             "GBP" => 0.72,
             "JPY" => 109.73,
             "CAD" => 1.26,
             "AUD" => 1.30
         ),
         "EUR" => array(
-            "USD" => 1.19,
+            "USD" => 1.09,
             "GBP" => 0.86,
             "JPY" => 131.51,
             "CAD" => 1.52,

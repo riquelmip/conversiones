@@ -14,7 +14,7 @@ class Calculadora extends Controllers
         $data['page_tag'] = "Calculadora de Conversión";
         $data['page_title'] = "Calculadora de Conversión";
         $data['page_name'] = "calculadora";
-        $this->views->getView($this, "index", $data);
+        $this->views->getView($this, "calculadora", $data);
     }
 
     public function convertir()

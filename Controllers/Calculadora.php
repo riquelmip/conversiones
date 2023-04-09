@@ -27,23 +27,18 @@ class Calculadora extends Controllers
 
             if ($tipo == 'Longitud') {
                 $this->convertidor = new ConversorLongitud();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Masa') {
                 $this->convertidor = new ConversorMasa();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Volumen') {
                 $this->convertidor = new ConversorVolumen();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Moneda') {
                 $this->convertidor = new ConversorMoneda();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Tiempo') {
                 $this->convertidor = new ConversorTiempo();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             } else if ($tipo == 'Datos') {
                 $this->convertidor = new ConversorDatos();
-                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             }
+            $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             die();
         }

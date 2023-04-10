@@ -20,27 +20,34 @@ class Calculadora extends Controllers
     public function convertir()
     {
         if ($_POST) {
+
             $tipo = $_POST['tipo'];
             $valor = $_POST['valor'];
             $unidad_desde = $_POST['unidad1'];
             $unidad_hasta = $_POST['unidad2'];
 
-            if ($tipo == 'Longitud') {
-                $this->convertidor = new ConversorLongitud();
-            } else if ($tipo == 'Masa') {
-                $this->convertidor = new ConversorMasa();
-            } else if ($tipo == 'Volumen') {
-                $this->convertidor = new ConversorVolumen();
-            } else if ($tipo == 'Moneda') {
-                $this->convertidor = new ConversorMoneda();
-            } else if ($tipo == 'Tiempo') {
-                $this->convertidor = new ConversorTiempo();
-            } else if ($tipo == 'Datos') {
-                $this->convertidor = new ConversorDatos();
+            if (doubleval($valor) >= 0) {
+                if ($tipo == 'Longitud') {
+                    $this->convertidor = new ConversorLongitud();
+                } else if ($tipo == 'Masa') {
+                    $this->convertidor = new ConversorMasa();
+                } else if ($tipo == 'Volumen') {
+                    $this->convertidor = new ConversorVolumen();
+                } else if ($tipo == 'Moneda') {
+                    $this->convertidor = new ConversorMoneda();
+                } else if ($tipo == 'Tiempo') {
+                    $this->convertidor = new ConversorTiempo();
+                } else if ($tipo == 'Datos') {
+                    $this->convertidor = new ConversorDatos();
+                }
+                $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                die();
+            } else {
+                $arrResponse = array('estado' => false, 'msg' => 'No puede convertir un número negativo');
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                die();
             }
-            $arrResponse = array('estado' => true, 'resultado' => round($this->convertidor->convertir($valor, $unidad_desde, $unidad_hasta), 2), 'ud_final' => $unidad_hasta);
-            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-            die();
         }
     }
 

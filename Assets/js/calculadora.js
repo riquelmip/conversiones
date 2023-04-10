@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
           $("#ud_final").val(String(jsonData.ud_final));
           toastr.success("Exito", "Conversión realizada");
         } else {
-          toastr.error("Ocurrió un error", "Error");
+          toastr.error(jsonData.msg, "Error");
         }
       },
       error: function (json) {

@@ -326,7 +326,7 @@
             <div class="card">
               <img src="<?= media(); ?>/images/rudy.jpeg" class="card-img-top img-fluid w-100 h-75" alt="...">
               <div class="card-body">
-                <h6 class="card-title text-center">Gudiel Rivera</h6>
+                <h6 class="card-title text-center">Rudy Gudiel</h6>
               </div>
             </div>
           </div>
